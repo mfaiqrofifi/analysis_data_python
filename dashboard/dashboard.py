@@ -6,6 +6,7 @@ import numpy as np
 import matplotlib.dates as mdates  # Import mdates for date formatting
 import geopandas as gpd
 from shapely.geometry import Point
+import os
 
 # === CONFIG DASHBOARD ===
 st.set_page_config(
@@ -39,8 +40,14 @@ st.markdown(
 # Set a consistent Seaborn style
 sns.set_style("whitegrid")
 
+# Get the directory of the current script
+current_dir = os.path.dirname(os.path.abspath(__file__))
+
+# Construct the full path to the CSV file
+csv_path = os.path.join(current_dir, "main_data.csv")
+
 # Load the dataset
-df = pd.read_csv("main_data.csv")
+df = pd.read_csv(csv_path)
 
 # Convert 'order_purchase_timestamp' to datetime format
 df['order_purchase_timestamp'] = pd.to_datetime(df['order_purchase_timestamp'], errors='coerce')
