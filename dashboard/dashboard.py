@@ -131,9 +131,15 @@ def plot_heatmap(df):
     # 🌍 Create GeoDataFrame
     gdf = gpd.GeoDataFrame(df, geometry=geometry, crs="EPSG:4326")
 
-    # 🗺️ Load shapefile for Brazil
+    # Get the directory of the current script
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+
+    # Construct the full path to the shapefile
+    shapefile_path = os.path.join(current_dir, "ne_110m_admin_0_countries", "ne_110m_admin_0_countries.shp")
+
+    # Load shapefile for Brazil
     try:
-        world = gpd.read_file("C:\\Users\\Faiq\\Data Analitics\\ne_110m_admin_0_countries\\ne_110m_admin_0_countries.shp")
+        world = gpd.read_file(shapefile_path)
     except FileNotFoundError:
         st.error("Shapefile not found. Please check the file path.")
         return
@@ -257,9 +263,15 @@ def plot_late_delivery(df):
     # Create GeoDataFrame
     gdf = gpd.GeoDataFrame(df, geometry='geometry', crs='EPSG:4326')
 
+    # Get the directory of the current script
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+
+    # Construct the full path to the shapefile
+    shapefile_path = os.path.join(current_dir, "ne_110m_admin_0_countries", "ne_110m_admin_0_countries.shp")
+
     # Load shapefile for Brazil
     try:
-        world = gpd.read_file("C:\\Users\\Faiq\\Data Analitics\\ne_110m_admin_0_countries\\ne_110m_admin_0_countries.shp")
+        world = gpd.read_file(shapefile_path)
     except FileNotFoundError:
         st.error("Shapefile not found. Please check the file path.")
         return
