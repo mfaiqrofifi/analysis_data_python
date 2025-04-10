@@ -12,6 +12,13 @@ Aplikasi ini sudah tersedia secara online dan dapat diakses melalui link berikut
 
 ---
 
+## Clone Repository dari GitHub 🛠️
+Sebelum memulai, pastikan Anda sudah meng-clone repository ini ke komputer Anda. Gunakan perintah berikut:
+```bash
+git https://github.com/mfaiqrofifi/analysis_data_python.git
+cd analysis_data_python
+```
+
 ## Setup Environment - Python 🐍
 Langkah-langkah untuk membuat environment menggunakan Anaconda:
 ```bash
