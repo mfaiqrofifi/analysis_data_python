@@ -131,20 +131,16 @@ def plot_heatmap(df):
     # 🌍 Create GeoDataFrame
     gdf = gpd.GeoDataFrame(df, geometry=geometry, crs="EPSG:4326")
 
-    # Get the directory of the current script
-    current_dir = os.path.dirname(os.path.abspath(__file__))
+    # URL ke GeoJSON Natural Earth
+    url = "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_110m_admin_0_countries.geojson"
 
-    # Construct the full path to the shapefile
-    shapefile_path = os.path.join(current_dir, "ne_110m_admin_0_countries", "ne_110m_admin_0_countries.shp")
-
-    # Load shapefile for Brazil
+    # Load GeoJSON untuk Brazil
     try:
-        world = gpd.read_file(shapefile_path)
-    except FileNotFoundError:
-        st.error("Shapefile not found. Please check the file path.")
+        world = gpd.read_file(url)
+        brazil = world[world['ADMIN'] == 'Brazil']
+    except Exception as e:
+        st.error(f"Error loading GeoJSON data: {e}")
         return
-
-    brazil = world[world['ADMIN'] == 'Brazil']
 
     # 🧼 Filter points within Brazil's boundaries
     gdf_brazil = gdf[gdf.within(brazil.geometry.unary_union)]
@@ -263,20 +259,16 @@ def plot_late_delivery(df):
     # Create GeoDataFrame
     gdf = gpd.GeoDataFrame(df, geometry='geometry', crs='EPSG:4326')
 
-    # Get the directory of the current script
-    current_dir = os.path.dirname(os.path.abspath(__file__))
+    # URL ke GeoJSON Natural Earth
+    url = "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_110m_admin_0_countries.geojson"
 
-    # Construct the full path to the shapefile
-    shapefile_path = os.path.join(current_dir, "ne_110m_admin_0_countries", "ne_110m_admin_0_countries.shp")
-
-    # Load shapefile for Brazil
+    # Load GeoJSON untuk Brazil
     try:
-        world = gpd.read_file(shapefile_path)
-    except FileNotFoundError:
-        st.error("Shapefile not found. Please check the file path.")
+        world = gpd.read_file(url)
+        brazil = world[world['ADMIN'] == 'Brazil']
+    except Exception as e:
+        st.error(f"Error loading GeoJSON data: {e}")
         return
-
-    brazil = world[world['ADMIN'] == 'Brazil']
 
     # Filter points within Brazil's boundaries
     gdf_brazil_only = gdf[gdf.within(brazil.geometry.unary_union)]
